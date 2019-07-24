@@ -3,12 +3,12 @@ import * as Koa from 'koa';
 // import * as bodyParser from 'koa-bodyparser';
 // import * as helmet from 'koa-helmet';
 import * as cors from '@koa/cors';
-// import * as winston from 'winston';
+import * as winston from 'winston';
 // import { createConnection } from 'typeorm';
 // import 'reflect-metadata';
 // import * as PostgressConnectionStringParser from 'pg-connection-string';
 
-// import { logger } from './logging';
+import { logger } from './logging';
 import { config } from './config';
 import { router } from './routes';
 
@@ -41,7 +41,7 @@ import { router } from './routes';
     app.use(cors());
 
     // Logger middleware -> use winston as logger (logging.ts with config)
-    // app.use(logger(winston));
+    app.use(logger(winston));
 
     // Enable bodyParser with default options
     // app.use(bodyParser());

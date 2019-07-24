@@ -10,6 +10,13 @@ This repo serves as the starting point for all Serverless API projects. The boil
 ## Components and Prerequisites
 - **Runtime:** Node Carbon (managed with [nvm](https://github.com/nvm-sh/nvm))
 
+## Getting Started
+1. Copy `.env.example` to `.env`
+2. Run `yarn`
+3. Run `yarn watch`
+4. Wait a sec for the server to spin up ...
+5. In a browser or Postman, go to `http://localhost:3000` to see **Hello World!**
+
 ## Author
 Bryan Vaz (Github: [@bryanvaz](https://github.com/bryanvaz))
 
