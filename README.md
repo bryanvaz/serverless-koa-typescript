@@ -3,7 +3,7 @@
 This repo serves as the starting point for all Serverless API projects. The boilerplate creates a solid foundation for any AWS Lambda-based API project using Koa (in Typescript) with testing, ORM, infrastructure orchestration, and CI/CD already set up.
 
 ## Features
-- Node >= 8.1.2 syntax support
+- Node >= 8.1.2 syntax support (through webpack)
 - Serverless Framework to deploy Lambda (with 15 min execution support)
 - Eslint as linter
 
@@ -12,3 +12,6 @@ This repo serves as the starting point for all Serverless API projects. The boil
 
 ## Author
 Bryan Vaz (Github: [@bryanvaz](https://github.com/bryanvaz))
+
+## Thanks to
+* https://github.com/javieraviles/node-typescript-koa-rest for inspiration and baseline reference koa typescript implementation
