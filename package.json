@@ -1,0 +1,9 @@
+{
+  "name": "serverless-koa-typescript",
+  "version": "1.0.0",
+  "description": "Boilerplate for Serverless API on AWS using Koa, Typescript, Jest, Terraform, and CircleCI",
+  "main": "index.js",
+  "repository": "https://github.com/bryanvaz/serverless-koa-typescript",
+  "author": "Bryan Vaz <bryanvaz@users.noreply.github.com>",
+  "license": "MIT"
+}
