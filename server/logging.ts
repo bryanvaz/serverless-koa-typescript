@@ -19,7 +19,7 @@ export function logger(winstonInstance) {
             new winston.transports.Console({ format: winston.format.combine(
                 winston.format.colorize(),
                 winston.format.simple()
-              ) })
+            ) })
         ]
     });
 
@@ -40,7 +40,7 @@ export function logger(winstonInstance) {
             logLevel = 'info';
         }
 
-        const msg: string = `[IP: ${ctx.request.ip}] ${ctx.method} ${ctx.originalUrl} ${ctx.status} ${ms}ms`;
+        const msg = `[IP: ${ctx.request.ip}] ${ctx.method} ${ctx.originalUrl} ${ctx.status} ${ms}ms`;
 
         winstonInstance.log(logLevel, msg);
     };
