@@ -1,3 +1,8 @@
+/**
+ * Base Koa Server Entry Point
+ * Author: Bryan Vaz
+ * Date Created: 24 July 2019
+ */
 import * as Koa from 'koa';
 // import * as jwt from 'koa-jwt';
 // import * as bodyParser from 'koa-bodyparser';

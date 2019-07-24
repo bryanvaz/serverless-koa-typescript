@@ -1,4 +1,8 @@
-
+/**
+ * Global Koa Configuration (Local and Remote)
+ * Author: Bryan Vaz
+ * Date Created: 24 July 2019
+ */
 import * as dotenv from 'dotenv';
 
 dotenv.config({ path: '.env' });

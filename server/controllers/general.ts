@@ -1,3 +1,8 @@
+/**
+ * Sample Controller for Boilerplate Example
+ * Author: Bryan Vaz
+ * Date Created: 24 July 2019
+ */
 import { BaseContext } from 'koa';
 
 export default class GeneralController {
