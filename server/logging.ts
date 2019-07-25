@@ -3,45 +3,46 @@
  * Author: Bryan Vaz
  * Date Created: 24 July 2019
  */
-import * as Koa from 'koa';
+import { Context } from 'koa';
+import {
+  createLogger, format, transports,
+} from 'winston';
 import { config } from './config';
-import * as winston from 'winston';
 
-export function logger(winstonInstance) {
-    winstonInstance.configure({
-        level: config.debugLogging ? 'debug' : 'info',
-        transports: [
-            //
-            // - Write all logs error (and below) to `error.log`.
-            new winston.transports.File({ filename: 'error.log', level: 'error' }),
-            //
-            // - Write to all logs with specified level to console.
-            new winston.transports.Console({ format: winston.format.combine(
-                winston.format.colorize(),
-                winston.format.simple()
-            ) })
-        ]
-    });
+export const logger = createLogger({
+  level: config.debugLogging ? 'debug' : 'info',
+  transports: [
+    //
+    // - Write all logs error (and below) to `error.log`.
+    new transports.File({ filename: 'error.log', level: 'error' }),
+    //
+    // - Write to all logs with specified level to console.
+    new transports.Console({
+      format: format.combine(
+        format.colorize(),
+        format.simple(),
+      ),
+    }),
+  ],
+});
 
-    return async(ctx: Koa.Context, next: () => Promise<any>) => {
+export async function loggerMiddleware(ctx: Context, next: Function): Promise<void> {
+  const start = new Date().getMilliseconds();
 
-        const start = new Date().getMilliseconds();
+  await next();
 
-        await next();
+  const ms = new Date().getMilliseconds() - start;
 
-        const ms = new Date().getMilliseconds() - start;
+  let logLevel: string;
+  if (ctx.status >= 500) {
+    logLevel = 'error';
+  } else if (ctx.status >= 400) {
+    logLevel = 'warn';
+  } else if (ctx.status >= 100) {
+    logLevel = 'info';
+  }
 
-        let logLevel: string;
-        if (ctx.status >= 500) {
-            logLevel = 'error';
-        } else if (ctx.status >= 400) {
-            logLevel = 'warn';
-        } else if (ctx.status >= 100) {
-            logLevel = 'info';
-        }
+  const msg = `[IP: ${ctx.request.ip}] ${ctx.method} ${ctx.originalUrl} ${ctx.status} ${ms}ms`;
 
-        const msg = `[IP: ${ctx.request.ip}] ${ctx.method} ${ctx.originalUrl} ${ctx.status} ${ms}ms`;
-
-        winstonInstance.log(logLevel, msg);
-    };
+  logger.log(logLevel, msg);
 }

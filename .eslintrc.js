@@ -2,6 +2,7 @@ module.exports =  {
   parser:  '@typescript-eslint/parser',  // Specifies the ESLint parser
   extends:  [
     'plugin:@typescript-eslint/recommended',  // Uses the recommended rules from the @typescript-eslint/eslint-plugin
+    'airbnb-typescript/base',
   ],
  parserOptions:  {
     ecmaVersion:  2018,  // Allows for the parsing of modern ECMAScript features
@@ -10,5 +11,7 @@ module.exports =  {
   rules:  {
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
+    'import/prefer-default-export': 0, // Too strict.
+    'max-len': ['error', { code: 144 }],
   },
 };
