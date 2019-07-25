@@ -8,7 +8,13 @@ This repo serves as the starting point for all Serverless API projects. The boil
 - Eslint as linter
 
 ## Components and Prerequisites
-- **Runtime:** Node Carbon (managed with [nvm](https://github.com/nvm-sh/nvm))
+- **Language:** [Typescript v3.5](https://github.com/microsoft/TypeScript) with ECMA2018 support
+- **Dev Runtime:** Node Dubnium (see [ES2018](https://node.green/) support)
+- **Framework:** [KoaJS v2](https://github.com/koajs/koa/) - API only implementation
+- **Linter:** ESLint with Typescript [Support](https://github.com/typescript-eslint/typescript-eslint)
+- **Git Hooks:** Provided by [husky](https://github.com/typicode/husky) 🐶 and [lint-staged](https://github.com/okonet/lint-staged) 🚫💩
+- **Logger:** [Winston](hhttps://github.com/winstonjs/winston)
+
 
 ## Getting Started
 1. Copy `.env.example` to `.env`
@@ -22,3 +28,6 @@ Bryan Vaz (Github: [@bryanvaz](https://github.com/bryanvaz))
 
 ## Thanks to
 * https://github.com/javieraviles/node-typescript-koa-rest for inspiration and baseline reference koa typescript implementation
+
+## Additional Reference
+* Git Hooks: https://medium.com/gits-apps-insight/utilizing-git-hook-by-using-eslint-husky-and-lint-staged-18b6f6f60f1e
