@@ -9,6 +9,10 @@ import {
 } from 'winston';
 import { config } from './config';
 
+/**
+ * Global logger instance of winston.
+ * This instance should be used in all areas of the app
+ */
 export const logger = createLogger({
   level: config.debugLogging ? 'debug' : 'info',
   transports: [
@@ -26,6 +30,12 @@ export const logger = createLogger({
   ],
 });
 
+/**
+ * Logger middleware for Koa requests.
+ * Just logs simple details about the request to transports
+ * @param ctx Koa Request Context
+ * @param next Koa Next Callback
+ */
 export async function loggerMiddleware(ctx: Context, next: Function): Promise<void> {
   const start = new Date().getMilliseconds();
 
