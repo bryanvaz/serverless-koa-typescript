@@ -15,5 +15,6 @@ module.exports =  {
     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
     'import/prefer-default-export': 0, // Too strict.
     'max-len': ['error', { code: 144 }],
+    '@typescript-eslint/interface-name-prefix': 0, // the leading 'I' helps differentiate interfaces 
   },
 };

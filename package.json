@@ -11,7 +11,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "prettier --write \"server/**/*.ts\" && eslint --fix server/**/*.ts",
-    "watch": "nodemon --watch server -e ts,tsx --exec ts-node server"
+    "watch": "nodemon --watch server -e ts,tsx --exec ts-node server",
     "jest": "jest"
   },
   "dependencies": {

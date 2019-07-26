@@ -56,6 +56,6 @@
   },
   "include": [
       "server/**/*"
-  ]
+  ],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
-    "exclude": ["node_modules", "**/*.spec.ts"]
