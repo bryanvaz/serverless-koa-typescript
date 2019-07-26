@@ -3,7 +3,7 @@
 This repo serves as the starting point for all Serverless API projects. The boilerplate creates a solid foundation for any AWS Lambda-based API project using Koa (in Typescript) with testing, ORM, infrastructure orchestration, and CI/CD already set up.
 
 ## Features
-- Node >= 8.1.2 syntax support (through webpack)
+- Node ~8.1.2 syntax support (through webpack), which is required by Lambda
 - Serverless Framework to deploy Lambda (with 15 min execution support)
 - Eslint as linter
 
@@ -13,7 +13,8 @@ This repo serves as the starting point for all Serverless API projects. The boil
 - **Framework:** [KoaJS v2](https://github.com/koajs/koa/) - API only implementation
 - **Linter:** ESLint with Typescript [Support](https://github.com/typescript-eslint/typescript-eslint)
 - **Git Hooks:** Provided by [husky](https://github.com/typicode/husky) 🐶 and [lint-staged](https://github.com/okonet/lint-staged) 🚫💩
-- **Logger:** [Winston](hhttps://github.com/winstonjs/winston)
+- **Logger:** [Winston](https://github.com/winstonjs/winston)
+- **Test Framework:** [Jest](https://jestjs.io/) & [Supertest](https://github.com/visionmedia/supertest)
 
 
 ## Getting Started
@@ -22,6 +23,17 @@ This repo serves as the starting point for all Serverless API projects. The boil
 3. Run `yarn watch`
 4. Wait a sec for the server to spin up ...
 5. In a browser or Postman, go to `http://localhost:3000` to see **Hello World!**
+
+## Testing
+Unit Testing is accomplished through the Jest(https://jestjs.io/) framework. In addition, API requests are mocked using the Supertest wrapper arround the Koa API.
+
+Run all tests with `yarn test`.
+
+Tests are broken down into the blocks/types:
+1. **Application Level Tests** - These are integration tests that test the entire API server as it would run in Lambda (without the Lambda wrapper, triggered by an external API request. These test how all the components fit together including, but not limited to, the router, middleware, controllers, models, and DB connections.
+<br>_Common uses include: ensuring model consistency across multiple controllers, middleware consistency across endpoints, and role/user restrictions across endpoints and controllers_
+2. **Router Level Tests** - Router tests ensure the correct controllers are mounted at the correct endpoints. This is critical as external services depend on the stability of the endpoints.
+3. **Controller Level Test** - Controller tests mount individual controllers (and individual functions) in vanilla Koa servers to confirm granular level functionality. This decreases the rigor of application-level & router-level testing required.
 
 ## Author
 Bryan Vaz (Github: [@bryanvaz](https://github.com/bryanvaz))
