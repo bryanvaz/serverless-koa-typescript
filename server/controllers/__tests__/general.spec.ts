@@ -5,7 +5,6 @@
  */
 import * as Koa from 'koa';
 import * as request from 'supertest';
-// import * as assert from 'assert';
 
 import { general } from '..';
 
