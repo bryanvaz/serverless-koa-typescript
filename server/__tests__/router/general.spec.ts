@@ -21,11 +21,12 @@ describe('general routes', () => {
   });
 
   it("should mount helloWorld at '/env-test'", async () => {
-    process.env.ENV_TEST = 'ENV_TEST from Jest';
+    const testString = `ENV_TEST from Jest ${Math.random()}`;
+    process.env.ENV_TEST = testString;
     const response = await request(server.listen())
       .get('/env-test')
       .expect(200);
     expect(response.body.requestEndpoint).toBe('Env Variable Test');
-    expect(response.body.data).toBe(process.env.ENV_TEST);
+    expect(response.body.data).toBe(testString);
   });
 });

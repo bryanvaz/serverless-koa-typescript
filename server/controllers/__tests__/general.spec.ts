@@ -33,19 +33,28 @@ describe('controllers.general:', () => {
     const server = new Koa();
     server.use(general.envTest);
 
-    process.env.ENV_TEST = 'ENV_TEST from Jest';
-
     it('should be able to call function successfully', () =>
       request(server.listen())
         .get('/')
         .expect(200));
 
-    it('should return correct data', async () => {
+    it('should return correct data when ENV_TEST is set', async () => {
+      const testString = `ENV_TEST from Jest ${Math.random()}`;
+      process.env.ENV_TEST = testString;
       const response = await request(server.listen())
         .get('/')
         .expect(200);
       expect(response.body.requestEndpoint).toBe('Env Variable Test');
-      expect(response.body.data).toBe(process.env.ENV_TEST);
+      expect(response.body.data).toBe(testString);
+    });
+
+    it('should return correct data when ENV_TEST is not set', async () => {
+      process.env.ENV_TEST = '';
+      const response = await request(server.listen())
+        .get('/')
+        .expect(200);
+      expect(response.body.requestEndpoint).toBe('Env Variable Test');
+      expect(response.body.data).toBe('ENV_TEST Var not set');
     });
   });
 });
