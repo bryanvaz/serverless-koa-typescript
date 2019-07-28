@@ -10,7 +10,7 @@
   "author": "Bryan Vaz <bryanvaz@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "prettier --write \"server/**/*.ts\" && eslint --fix server/**/*.ts",
+    "lint": "prettier --write \"src/**/*.ts\" && eslint --fix src/**/*.ts",
     "watch": "nodemon --watch server -e ts,tsx --exec ts-node server",
     "test": "cross-env jest --forceExit"
   },
