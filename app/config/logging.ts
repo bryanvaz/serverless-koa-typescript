@@ -5,14 +5,14 @@
  */
 import { Context } from 'koa';
 import { createLogger, format, transports } from 'winston';
-import { config } from './config';
+import { env } from '@config/environment';
 
 /**
  * Global logger instance of winston.
  * This instance should be used in all areas of the app
  */
 export const logger = createLogger({
-  level: config.debugLogging ? 'debug' : 'info',
+  level: env.debugLogging ? 'debug' : 'info',
   transports: [
     //
     // - Write all logs error (and below) to `error.log`.

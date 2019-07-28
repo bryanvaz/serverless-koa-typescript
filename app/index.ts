@@ -1,5 +1,5 @@
 /**
- * Base Koa Server Entry Point
+ * Application Server Entry Point
  * Author: Bryan Vaz
  * Date Created: 24 July 2019
  */
@@ -12,7 +12,7 @@ import * as cors from '@koa/cors';
 // import 'reflect-metadata';
 // import * as PostgressConnectionStringParser from 'pg-connection-string';
 
-import { /* logger , */ loggerMiddleware } from '@app/logging';
+import { /* logger , */ loggerMiddleware } from '@config/logging';
 // import { config } from './config';
 import { router } from '@app/routes';
 
