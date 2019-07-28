@@ -1,5 +1,5 @@
 module.exports = {
-    roots: ['<rootDir>/src'],
+    roots: ['<rootDir>/app'],
     transform: {
       '^.+\\.tsx?$': 'ts-jest',
     },
@@ -7,7 +7,7 @@ module.exports = {
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
     collectCoverage: true,
     collectCoverageFrom: [
-      'src/**/*.{ts,js}',
+      'app/**/*.{ts,js}',
       '!**/node_modules/**',
       '!**/build/**',
       '!**/coverage/**',
