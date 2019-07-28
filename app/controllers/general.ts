@@ -19,4 +19,25 @@ export default class GeneralController {
       data: process.env.ENV_TEST || 'ENV_TEST Var not set',
     };
   }
+
+  /**
+   * Squares the input parameter in the body
+   * @param ctx Koa Request Context
+   */
+  public static async square(ctx: BaseContext): Promise<void> {
+    if (ctx.request.body && ctx.request.body.input) {
+      ctx.body = {
+        requestEndpoint: 'Square',
+        input: ctx.request.body.input,
+        output: ctx.request.body.input ** 2,
+      };
+    } else {
+      ctx.body = {
+        requestEndpoint: 'Square',
+        input: ctx.request.body.input,
+        error: ['No input provided'],
+      };
+      ctx.status = 400;
+    }
+  }
 }

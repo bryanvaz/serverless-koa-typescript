@@ -5,7 +5,7 @@
  */
 import * as Koa from 'koa';
 // import * as jwt from 'koa-jwt';
-// import * as bodyParser from 'koa-bodyparser';
+import * as koaBody from 'koa-body';
 // import * as helmet from 'koa-helmet';
 import * as cors from '@koa/cors';
 // import { createConnection } from 'typeorm';
@@ -51,7 +51,7 @@ export class ApplicationServer extends Koa {
     this.use(loggerMiddleware);
 
     // Enable bodyParser with default options
-    // app.use(bodyParser());
+    this.use(koaBody());
 
     // JWT middleware -> below this line routes are only reached if JWT token is valid, secret as env variable
     // app.use(jwt({ secret: config.jwtSecret }));
