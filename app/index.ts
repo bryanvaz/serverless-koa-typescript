@@ -12,9 +12,9 @@ import * as cors from '@koa/cors';
 // import 'reflect-metadata';
 // import * as PostgressConnectionStringParser from 'pg-connection-string';
 
-import { /* logger , */ loggerMiddleware } from './logging';
+import { /* logger , */ loggerMiddleware } from '@app/logging';
 // import { config } from './config';
-import { router } from './routes';
+import { router } from '@app/routes';
 
 // create connection with database
 // note that its not active database connection

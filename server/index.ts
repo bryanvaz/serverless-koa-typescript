@@ -3,9 +3,9 @@
  * Author: Bryan Vaz
  * Date Created: 24 July 2019
  */
-import { app } from '../src';
-import { logger } from '../src/logging';
-import { config } from '../src/config';
+import { logger } from '@app/logging';
+import { config } from '@app/config';
+import { app } from '@app';
 
 app.listen(config.port);
 

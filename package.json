@@ -10,8 +10,8 @@
   "author": "Bryan Vaz <bryanvaz@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "prettier --write \"src/**/*.ts\" && eslint --fix src/**/*.ts",
-    "watch": "nodemon --watch server -e ts,tsx --exec ts-node server",
+    "lint": "prettier --write \"app/**/*.ts\" --write server/**/*.ts && eslint --fix app/**/*.ts server/**/*.ts",
+    "watch": "nodemon --watch app --watch server -e ts,tsx --exec ts-node -r tsconfig-paths/register server",
     "test": "cross-env jest --forceExit"
   },
   "dependencies": {
@@ -36,6 +36,7 @@
     "eslint": "^6.1.0",
     "eslint-config-airbnb-typescript": "^4.0.1",
     "eslint-config-prettier": "^6.0.0",
+    "eslint-import-resolver-typescript": "^1.1.1",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.13.7",
     "eslint-plugin-prettier": "^3.1.0",
@@ -47,6 +48,7 @@
     "supertest": "^4.0.2",
     "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",
+    "tsconfig-paths": "^3.8.0",
     "tslint": "^5.18.0",
     "typescript": "^3.5.3"
   },
