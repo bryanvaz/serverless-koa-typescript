@@ -12,5 +12,6 @@ const router = new Router();
 // GENERAL SAMPLE ROUTES
 router.get('/', controller.general.helloWorld);
 router.get('/env-test', controller.general.envTest);
+router.post('/square', controller.general.square);
 
 export { router };

@@ -26,11 +26,22 @@ export default class GeneralController {
    */
   public static async square(ctx: BaseContext): Promise<void> {
     if (ctx.request.body && ctx.request.body.input) {
-      ctx.body = {
-        requestEndpoint: 'Square',
-        input: ctx.request.body.input,
-        output: ctx.request.body.input ** 2,
-      };
+      if (typeof ctx.request.body.input === 'number') {
+        ctx.body = {
+          requestEndpoint: 'Square',
+          input: ctx.request.body.input,
+          output: ctx.request.body.input ** 2,
+          type: typeof ctx.request.body.input,
+        };
+      } else {
+        ctx.body = {
+          requestEndpoint: 'Square',
+          input: ctx.request.body.input,
+          type: typeof ctx.request.body.input,
+          error: ["input must be of type 'number'"],
+        };
+        ctx.status = 400;
+      }
     } else {
       ctx.body = {
         requestEndpoint: 'Square',

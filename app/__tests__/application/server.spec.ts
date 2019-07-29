@@ -27,4 +27,14 @@ describe('general routes', () => {
     expect(response.body.requestEndpoint).toBe('Env Variable Test');
     expect(response.body.data).toBe(testString);
   });
+  it("should mount helloWorld at '/square'", async () => {
+    const input = Math.ceil(Math.random() * 100 + 1);
+    const response = await request(server.listen())
+      .post('/square')
+      .send({
+        input,
+      })
+      .expect(200);
+    expect(response.body.output).toBe(input ** 2);
+  });
 });

@@ -73,7 +73,7 @@ describe('controllers.general:', () => {
     });
 
     it('function calls successfully with input', async () => {
-      const input = 14;
+      const input = Math.ceil(Math.random() * 100 + 1);
       const response = await request(server.listen())
         .post('/')
         .send({
@@ -81,6 +81,17 @@ describe('controllers.general:', () => {
         })
         .expect(200);
       expect(response.body.output).toBe(input ** 2);
+    });
+
+    it('function fails with non number input', async () => {
+      const input = `string of ${Math.ceil(Math.random() * 100 + 1)}`;
+      const response = await request(server.listen())
+        .post('/')
+        .send({
+          input,
+        })
+        .expect(400);
+      expect(response.body.error).toContain("input must be of type 'number'");
     });
   });
 });
