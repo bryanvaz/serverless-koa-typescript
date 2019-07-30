@@ -6,7 +6,7 @@
 import * as Koa from 'koa';
 // import * as jwt from 'koa-jwt';
 import * as koaBody from 'koa-body';
-// import * as helmet from 'koa-helmet';
+import * as helmet from 'koa-helmet';
 import * as cors from '@koa/cors';
 // import { createConnection } from 'typeorm';
 // import 'reflect-metadata';
@@ -42,7 +42,7 @@ export class ApplicationServer extends Koa {
     super();
 
     // Provides important security headers to make your app more secure
-    // app.use(helmet());
+    this.use(helmet());
 
     // Enable cors with default options
     this.use(cors());

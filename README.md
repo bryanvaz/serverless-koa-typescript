@@ -15,6 +15,7 @@ This repo serves as the starting point for all Serverless API projects. The boil
 - **Git Hooks:** Provided by [husky](https://github.com/typicode/husky) 🐶 and [lint-staged](https://github.com/okonet/lint-staged) 🚫💩
 - **Logger:** [Winston](https://github.com/winstonjs/winston)
 - **Test Framework:** [Jest](https://jestjs.io/) & [Supertest](https://github.com/visionmedia/supertest)
+- **Security Headers:** [HelmetJS](https://github.com/venables/koa-helmet)
 
 
 ## Getting Started
