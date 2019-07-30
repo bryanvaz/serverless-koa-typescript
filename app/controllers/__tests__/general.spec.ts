@@ -5,6 +5,7 @@
  */
 import * as Koa from 'koa';
 import * as request from 'supertest';
+import * as koaBody from 'koa-body';
 
 import { general } from '..';
 
@@ -55,6 +56,42 @@ describe('controllers.general:', () => {
         .expect(200);
       expect(response.body.requestEndpoint).toBe('Env Variable Test');
       expect(response.body.data).toBe('ENV_TEST Var not set');
+    });
+  });
+
+  describe('square', () => {
+    // Initialize new server for function testing
+    const server = new Koa();
+    server.use(koaBody());
+    server.use(general.square);
+
+    it('function calls unsuccessfully with no input', async () => {
+      const response = await request(server.listen())
+        .post('/')
+        .expect(400);
+      expect(response.body.error).toContain('No input provided');
+    });
+
+    it('function calls successfully with input', async () => {
+      const input = Math.ceil(Math.random() * 100 + 1);
+      const response = await request(server.listen())
+        .post('/')
+        .send({
+          input,
+        })
+        .expect(200);
+      expect(response.body.output).toBe(input ** 2);
+    });
+
+    it('function fails with non number input', async () => {
+      const input = `string of ${Math.ceil(Math.random() * 100 + 1)}`;
+      const response = await request(server.listen())
+        .post('/')
+        .send({
+          input,
+        })
+        .expect(400);
+      expect(response.body.error).toContain("input must be of type 'number'");
     });
   });
 });
