@@ -1,6 +1,9 @@
 ##########################
 # Insert Custom Ignore statements below
 
+# Serverless Environment File
+serverless.env.yml
+
 # Bundled Webpack Code
 .webpack
 

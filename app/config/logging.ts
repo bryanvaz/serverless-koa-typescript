@@ -12,16 +12,15 @@ import { env } from '@config/environment';
  * This instance should be used in all areas of the app
  */
 export const logger = createLogger({
+  format: format.combine(format.colorize(), format.splat(), format.simple()),
   level: env.debugLogging ? 'debug' : 'info',
   transports: [
     //
     // - Write all logs error (and below) to `error.log`.
-    new transports.File({ filename: 'error.log', level: 'error' }),
+    // new transports.File({ filename: 'error.log', level: 'error' }),
     //
     // - Write to all logs with specified level to console.
-    new transports.Console({
-      format: format.combine(format.colorize(), format.simple()),
-    }),
+    new transports.Console({}),
   ],
 });
 

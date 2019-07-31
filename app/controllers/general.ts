@@ -4,6 +4,7 @@
  * Date Created: 24 July 2019
  */
 import { BaseContext } from 'koa';
+// import { logger } from '@config/logging';
 
 export default class GeneralController {
   public static async helloWorld(ctx: BaseContext): Promise<void> {

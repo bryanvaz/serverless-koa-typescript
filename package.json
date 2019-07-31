@@ -10,8 +10,11 @@
   "author": "Bryan Vaz <bryanvaz@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "prettier --write \"app/**/*.ts\" --write server/**/*.ts && eslint --fix app/**/*.ts server/**/*.ts",
+    "lint": "prettier --write \"app/**/*.ts\" --write server/**/*.ts --write functions/**/*.ts && eslint --fix functions/**/*.ts app/**/*.ts server/**/*.ts",
     "watch": "nodemon --watch app --watch server -e ts,tsx --exec ts-node -r tsconfig-paths/register server",
+    "sls": "serverless",
+    "sls:deploy": "serverless deploy -s dev",
+    "sls:test": "serverless invoke local -f server -p tests/simple_request.json",
     "test": "cross-env jest --forceExit"
   },
   "dependencies": {
@@ -21,9 +24,14 @@
     "koa-body": "^4.1.0",
     "koa-helmet": "^4.2.0",
     "koa-router": "^7.4.0",
+    "serverless-http": "^2.0.2",
+    "source-map-support": "^0.5.13",
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "@types/dotenv": "^6.1.1",
     "@types/jest": "^24.0.15",
     "@types/koa": "^2.0.49",
@@ -33,6 +41,7 @@
     "@types/supertest": "^2.0.8",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
+    "babel-plugin-source-map-support": "^2.1.1",
     "cross-env": "^5.2.0",
     "eslint": "^6.1.0",
     "eslint-config-airbnb-typescript": "^4.0.1",
@@ -43,15 +52,22 @@
     "eslint-plugin-prettier": "^3.1.0",
     "husky": "^3.0.1",
     "jest": "^24.8.0",
+    "json5": "^2.1.0",
     "lint-staged": "^9.2.0",
     "nodemon": "^1.19.1",
     "prettier": "^1.18.2",
+    "serverless": "^1.49.0",
+    "serverless-plugin-select": "^2.0.0-rc.1",
+    "serverless-webpack": "^5.3.1",
     "supertest": "^4.0.2",
     "ts-jest": "^24.0.2",
+    "ts-loader": "^6.0.4",
     "ts-node": "^8.3.0",
     "tsconfig-paths": "^3.8.0",
     "tslint": "^5.18.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.5.3",
+    "webpack": "^4.38.0",
+    "webpack-node-externals": "^1.7.2"
   },
   "lint-staged": {
     "*.ts": [
