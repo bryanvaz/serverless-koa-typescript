@@ -21,6 +21,7 @@ This repo serves as the starting point for all Serverless API projects. The boil
 
 ## Getting Started
 1. Copy `.env.example` to `.env`
+1. Copy `serverless.env.example.yml` to `serverless.env.example.yml`
 2. Run `yarn`
 3. Run `yarn watch`
 4. Wait a sec for the server to spin up ...
