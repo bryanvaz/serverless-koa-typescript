@@ -21,7 +21,7 @@ plugins:
   - serverless-plugin-select # Select functions to be deployed based on stage/region
   - serverless-webpack       # Packages and parses functions for lambda
   - '@anttiviljami/serverless-stack-output'  # Outputs final AWS stack details for downstream CI/CD processing 
-  - serverless-domain-manager # For Custom Domain name management
+  # - serverless-domain-manager # For Custom Domain name management
 
 custom:
   stage: ${opt:stage, self:provider.stage}
