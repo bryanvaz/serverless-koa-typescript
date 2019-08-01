@@ -12,6 +12,11 @@ provider:
   logRetentionInDays: 14
   endpointType: REGIONAL # Default API Gateway Endpoints should be regional. Other Options are: PRIVATE, or EDGE (serverless default)
 
+# Serverless Enterprise Settings (https://dashboard.serverless.com)
+# tenant:  MyTenantID
+# app:   MyAppID
+# org: MyOrgID
+
 plugins:
   - serverless-plugin-select # Select functions to be deployed based on stage/region
   - serverless-webpack       # Packages and parses functions for lambda
@@ -20,6 +25,8 @@ plugins:
 custom:
   stage: ${opt:stage, self:provider.stage}
   region: ${opt:region, self:provider.region}
+  prefix: ${self:service}-${self:custom.region}-${self:custom.stage}
+  api_prefix: ${self:service}-${self:custom.stage}
 
   # For serverless-webpack
   webpack:
@@ -50,58 +57,20 @@ functions:
           method: any
           path: '/{proxy+}'
           cors: true
-#    The following are a few example events you can configure
-#    NOTE: Please make sure to change your handler code to work with those events
-#    Check the event documentation for details
-#    events:
-#      - http:
-#          path: users/create
-#          method: get
-#      - s3: ${env:BUCKET}
-#      - schedule: rate(10 minutes)
-#      - sns: greeter-topic
-#      - stream: arn:aws:dynamodb:region:XXXXXX:table/foo/stream/1970-01-01T00:00:00.000
-#      - alexaSkill
-#      - iot:
-#          sql: "SELECT * FROM 'some_topic'"
-#      - cloudwatchEvent:
-#          event:
-#            source:
-#              - "aws.ec2"
-#            detail-type:
-#              - "EC2 Instance State-change Notification"
-#            detail:
-#              state:
-#                - pending
-
-#    Define function environment variables here
-#    environment:
-#      variable2: value2
 
 # you can add CloudFormation resource templates here
 resources:
+  Resources:
   Outputs:
-    ApiGatewayRestApiId:
+    rootApiGatewayId:
       Value:
         Ref: ApiGatewayRestApi
-    ApiGatewayRestApiName:
+      Export:
+        Name: ${self:custom.prefix}-restApiId # Export a CF name to be used by other services
+    rootApiGatewayResourceId:
       Value:
-        Ref: {"Fn::GetAtt": ["ApiGatewayRestApi", "Name"]}
-    # RootResourceId:
-    #   Value:
-    #     Ref: RootResourceId
-    # ExampleUserSecret:
-    #   Value: {"Fn::GetAtt": ["ExampleUserKey", "SecretAccessKey"]}
-    # ExampleStaticValue:
-    #   Value: example-static-value
-
-# resources:
-#   Resources:
-#     NewResource:
-#       Type: AWS::S3::Bucket
-#       Properties:
-#         BucketName: my-new-bucket
-#   Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"
+         Fn::GetAtt:
+          - ApiGatewayRestApi
+          - RootResourceId
+      Export:
+        Name: ${self:custom.prefix}-rootResourceId # Export a CF name to be used by other services

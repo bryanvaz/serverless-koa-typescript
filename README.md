@@ -16,6 +16,7 @@ This repo serves as the starting point for all Serverless API projects. The boil
 - **Logger:** [Winston](https://github.com/winstonjs/winston)
 - **Test Framework:** [Jest](https://jestjs.io/) & [Supertest](https://github.com/visionmedia/supertest)
 - **Security Headers:** [HelmetJS](https://github.com/venables/koa-helmet)
+- **Serverless Framwork:** [Serverless]()
 
 
 ## Getting Started
@@ -35,6 +36,9 @@ Tests are broken down into the blocks/types:
 <br>_Common uses include: ensuring model consistency across multiple controllers, middleware consistency across endpoints, and role/user restrictions across endpoints and controllers_
 2. **Router Level Tests** - Router tests ensure the correct controllers are mounted at the correct endpoints. This is critical as external services depend on the stability of the endpoints.
 3. **Controller Level Test** - Controller tests mount individual controllers (and individual functions) in vanilla Koa servers to confirm granular level functionality. This decreases the rigor of application-level & router-level testing required.
+
+## Setting up Custom Domains
+See https://serverless.com/blog/serverless-api-gateway-domain/ for additional details.
 
 ## Author
 Bryan Vaz (Github: [@bryanvaz](https://github.com/bryanvaz))
