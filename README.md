@@ -16,7 +16,7 @@ This repo serves as the starting point for all Serverless API projects. The boil
 - **Logger:** [Winston](https://github.com/winstonjs/winston)
 - **Test Framework:** [Jest](https://jestjs.io/) & [Supertest](https://github.com/visionmedia/supertest)
 - **Security Headers:** [HelmetJS](https://github.com/venables/koa-helmet)
-- **Serverless Framwork:** [Serverless]()
+- **Serverless Framework:** [Serverless](https://www.serverless.com)
 
 
 ## Getting Started
