@@ -10,10 +10,12 @@ provider:
   memorySize: 512 # Overwrite the default memory size. Default is 1024
   timeout: 30 # The default is 6 seconds
   logRetentionInDays: 14
+  endpointType: REGIONAL # Default API Gateway Endpoints should be regional. Other Options are: PRIVATE, or EDGE (serverless default)
 
 plugins:
   - serverless-plugin-select # Select functions to be deployed based on stage/region
-  - serverless-webpack
+  - serverless-webpack       # Packages and parses functions for lambda
+  - '@anttiviljami/serverless-stack-output'  # Outputs final AWS stack details for downstream CI/CD processing 
 
 custom:
   stage: ${opt:stage, self:provider.stage}
@@ -24,6 +26,11 @@ custom:
     webpackConfig: './webpack.config.js'
     includeModules: true
     packager: 'yarn'   # Packager that will be used to package your external modules
+  
+  # serverless-stack-output
+  output:
+    # handler: scripts/output.handler # Same syntax as you already know
+    file: .serverless/stack.json # toml, yaml, yml, and json format is available
 
 # you can add packaging information here
 package:
@@ -72,6 +79,22 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
+resources:
+  Outputs:
+    ApiGatewayRestApiId:
+      Value:
+        Ref: ApiGatewayRestApi
+    ApiGatewayRestApiName:
+      Value:
+        Ref: {"Fn::GetAtt": ["ApiGatewayRestApi", "Name"]}
+    # RootResourceId:
+    #   Value:
+    #     Ref: RootResourceId
+    # ExampleUserSecret:
+    #   Value: {"Fn::GetAtt": ["ExampleUserKey", "SecretAccessKey"]}
+    # ExampleStaticValue:
+    #   Value: example-static-value
+
 # resources:
 #   Resources:
 #     NewResource:

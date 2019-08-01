@@ -29,6 +29,7 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "@anttiviljami/serverless-stack-output": "^0.3.1",
     "@babel/core": "^7.5.5",
     "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.5.5",

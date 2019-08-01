@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@anttiviljami/serverless-stack-output@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@anttiviljami/serverless-stack-output/-/serverless-stack-output-0.3.1.tgz#1f0f254e5ec6b5deb74709af8abdbbb49c2d7ced"
+  integrity sha512-sRYUencY84ltO3AEqbE36vX4iqZPh6eiadEtFhKL2qLqaTF0ryaSDXcQbiqHlUH93FtDHupv7riH6B9Pv4M3Sw==
+  dependencies:
+    tomlify-j0.4 "^2.0.0"
+    yamljs "^0.3.0"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.5.5":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.5.5.tgz#bc0782f6d69f7b7d49531219699b988f669a8f9d"
@@ -8861,6 +8869,11 @@ toidentifier@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.0.tgz#7e1be3470f1e77948bc43d94a3c8f4d7752ba553"
   integrity sha512-yaOH/Pk/VEhBWWTlhI+qXxDFXlejDGcQipMlyxda9nthulaxLZUNcUqFxokp0vcYnvteJln5FNQDRrxj3YcbVw==
+
+tomlify-j0.4@^2.0.0:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/tomlify-j0.4/-/tomlify-j0.4-2.2.1.tgz#60c4e7dd2066b2e917dd9a0de5fd676c0a6d7c7b"
+  integrity sha512-0kCocYX8ujnbK6jQ9e+g9GLiCIfVkFaCB3DCTQDP7J79gPVZVmZgQZ/KUNe1a6hUfrmHHaErVGUjedfpaX5EZw==
 
 touch@^3.1.0:
   version "3.1.0"

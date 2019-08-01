@@ -14,8 +14,11 @@ jest-stare
 
 # Terraform state folder is hiding under the src folder
 **/.terraform
-.env.*
 .terraform
+
+# Standard environment files
+.env
+!.env.example
 
 ##########################
 # Created by https://www.gitignore.io/api/node,macos,windows,terraform,serverless,visualstudiocode
