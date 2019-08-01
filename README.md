@@ -26,7 +26,7 @@ This repo serves as the starting point for all Serverless API projects. The boil
 5. In a browser or Postman, go to `http://localhost:3000` to see **Hello World!**
 
 ## Testing
-Unit Testing is accomplished through the Jest(https://jestjs.io/) framework. In addition, API requests are mocked using the Supertest wrapper arround the Koa API.
+Unit Testing is accomplished through the Jest(https://jestjs.io/) framework. In addition, API requests are mocked using the Supertest wrapper around the Koa API.
 
 Run all tests with `yarn test`.
 

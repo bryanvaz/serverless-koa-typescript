@@ -14,7 +14,7 @@
     "watch": "nodemon --watch app --watch server -e ts,tsx --exec ts-node -r tsconfig-paths/register server",
     "sls": "serverless",
     "sls:deploy": "serverless deploy -s dev",
-    "sls:test": "serverless invoke local -f server -p tests/simple_request.json",
+    "sls:test": "serverless invoke local -f server -p tests/helloWorld.json",
     "test": "cross-env jest --forceExit"
   },
   "dependencies": {

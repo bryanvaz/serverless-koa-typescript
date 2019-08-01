@@ -38,6 +38,11 @@ functions:
       # BASE_URL: ${file(serverless.env.yml):${self:custom.stage}.BASE_URL}
       SLS_STAGE: ${self:custom.stage}
       TOKEN_TTL: 1d
+    events:
+      - http:
+          method: any
+          path: '/{proxy+}'
+          cors: true
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
