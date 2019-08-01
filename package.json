@@ -15,7 +15,12 @@
     "sls": "serverless",
     "sls:deploy": "serverless deploy -s dev",
     "sls:test": "serverless invoke local -f server -p tests/helloWorld.json",
-    "test": "cross-env jest --forceExit"
+    "test": "cross-env jest --forceExit",
+    "tf:init": "(cd terraform && terraform init && terraform workspace select dev)",
+    "tf:plan": "(cd terraform && terraform plan | landscape)",
+    "tf:apply": "(cd terraform && terraform apply)",
+    "tf:refresh": "(cd terraform && terraform refresh)",
+    "tf:output": "cd terraform && terraform init && terraform output > ../.env.terraform && cd .."
   },
   "dependencies": {
     "@koa/cors": "^3.0.0",

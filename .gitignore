@@ -12,9 +12,11 @@ junit.xml
 test-reports
 jest-stare
 
-# Terraform state folder is hiding under the src folder
+# Terraform state folder is hiding under the terraform folder
 **/.terraform
 .terraform
+/terraform/config.tf
+
 
 # Standard environment files
 .env

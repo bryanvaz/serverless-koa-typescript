@@ -7,7 +7,7 @@ This repo serves as the starting point for all Serverless API projects. The boil
 - Serverless Framework to deploy Lambda (with 15 min execution support)
 - Eslint as linter
 
-## Components and Prerequisites
+## Components
 - **Language:** [Typescript v3.5](https://github.com/microsoft/TypeScript) with ECMA2018 support
 - **Dev Runtime:** Node Dubnium (see [ES2018](https://node.green/) support)
 - **Framework:** [KoaJS v2](https://github.com/koajs/koa/) - API only implementation
@@ -17,7 +17,7 @@ This repo serves as the starting point for all Serverless API projects. The boil
 - **Test Framework:** [Jest](https://jestjs.io/) & [Supertest](https://github.com/visionmedia/supertest)
 - **Security Headers:** [HelmetJS](https://github.com/venables/koa-helmet)
 - **Serverless Framework:** [Serverless](https://www.serverless.com)
-
+- **Infrastructure Orchestration:** [Terraform](https://www.terraform.io)
 
 ## Getting Started
 1. Copy `.env.example` to `.env`
@@ -26,6 +26,14 @@ This repo serves as the starting point for all Serverless API projects. The boil
 3. Run `yarn watch`
 4. Wait a sec for the server to spin up ...
 5. In a browser or Postman, go to `http://localhost:3000` to see **Hello World!**
+
+## Deploying Assets to AWS
+* If using Aurora Serverless
+  * Install Terraform (`brew install terraform`)
+  * Install Terraform Landscape (`brew install terraform_landscape`)
+  * Copy `terraform/config.tf.example` to `terraform/config.tf` and update with relevant values
+  * Run `yarn tf:init` to initialize the terraform state and workspace
+  * If this is the first time, you will also need to run `terraform workspace new dev` to create the `dev` workspace
 
 ## Testing
 Unit Testing is accomplished through the Jest(https://jestjs.io/) framework. In addition, API requests are mocked using the Supertest wrapper around the Koa API.

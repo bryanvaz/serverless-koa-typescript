@@ -1,0 +1,38 @@
+### Environment configuration based on workspace
+locals {
+  # Workspace environments:
+  # prod: is for production assets
+  # uat: is for uat assets
+  # test: for development testing assets 
+  # dev: for personal dev assets 
+  env="${terraform.workspace}"
+  regions = {
+    "prod"="us-east-1"
+    "uat"="us-east-1"
+    "test"="ap-northeast-1"
+    "dev"="ap-northeast-1"
+  }
+  region="${lookup(local.regions,local.env)}"
+  service_name = "sls-koa-ts"
+  # Project Wide KMS
+  # kms_master_key_arn ="<KMS ARN>"
+}
+
+provider "aws" {
+  # All non-development Assets should based in Virginia to avoid inter-region traffic
+  region= "${local.region}"
+}
+
+# state managed in S3
+terraform {
+  backend "s3" {
+    bucket = "<<BUCKET NAME>>"
+    key    = "<<Service Prefix>>"
+    region = "<<BUCKET REGION>>
+  }
+}
+
+output "aws_region" {
+  value = "${local.region}"
+}
+
