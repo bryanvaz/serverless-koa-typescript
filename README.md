@@ -40,6 +40,17 @@ Tests are broken down into the blocks/types:
 ## Setting up Custom Domains
 See https://serverless.com/blog/serverless-api-gateway-domain/ for additional details.
 
+## Enterprise Serverless
+To set up your function to use enterprise serverless:
+1. Register at https://dashboard.serverless.com
+2. Run `yarn sls login` to connect your local installation to Serverless Enterprise
+3. Uncomment and populate: 
+    ```
+    tenant:  MyTenantID
+    app:   MyAppID
+    org: MyOrgID
+    ```
+
 ## Author
 Bryan Vaz (Github: [@bryanvaz](https://github.com/bryanvaz))
 
