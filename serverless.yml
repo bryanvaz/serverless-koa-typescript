@@ -29,6 +29,10 @@ custom:
   prefix: ${self:service}-${self:custom.region}-${self:custom.stage}
   api_prefix: ${self:service}-${self:custom.stage}
 
+  vpc:
+    securityGroupId: ${file(serverless.env.yml):${self:custom.stage}.vpc.securityGroupId}
+    subnetId: ${file(serverless.env.yml):${self:custom.stage}.vpc.subnetId}
+
   # For serverless-webpack
   webpack:
     webpackConfig: './webpack.config.js'
@@ -52,6 +56,18 @@ custom:
   #   certificateName: ${file(serverless.env.yml):${self:custom.stage}.customDomain.certificateName}
   #   hostedZoneId: ${file(serverless.env.yml):${self:custom.stage}.customDomain.hostedZoneId}
 
+  # For Aurora Serverless
+  aurora:
+    DatabaseName: aurora
+    MasterUsername: master
+    MasterUserPassword: password
+    DBClusterIdentifier: ${self:service}-${self:custom.stage}-db
+    EngineVersion: 10.7
+    HOST:
+      Fn::GetAtt: [AuroraRDSCluster, Endpoint.Address]
+    PORT:
+      Fn::GetAtt: [AuroraRDSCluster, Endpoint.Port]
+
 # you can add packaging information here
 package:
   individually: true
@@ -65,6 +81,11 @@ functions:
       # BASE_URL: ${file(serverless.env.yml):${self:custom.stage}.environment.BASE_URL}
       SLS_STAGE: ${self:custom.stage}
       TOKEN_TTL: 1d
+    vpc:
+      securityGroupIds:
+        - ${self:custom.vpc.securityGroupId}
+      subnetIds:
+        - ${self:custom.vpc.subnetId}
     events:
       - http:
           method: any
@@ -78,6 +99,39 @@ functions:
 # you can add CloudFormation resource templates here
 resources:
   Resources:
+    AuroraSecurityGroup:
+      Type: AWS::EC2::SecurityGroup
+      Properties: 
+        GroupDescription: Serverless Aurora SecurityGroup
+        GroupName: ${self:service}-${self:custom.stage}-AuroraSecurityGroup
+        SecurityGroupIngress: 
+          - Description: PostgreSQL Port
+            FromPort: 5432
+            IpProtocol: tcp
+            SourceSecurityGroupId: ${self:custom.vpc.securityGroupId}
+            ToPort: 5432
+    AuroraRDSCluster:
+      Type: AWS::RDS::DBCluster
+      Properties:
+        Engine: aurora-postgresql
+        EngineMode: serverless
+        EngineVersion: ${self:custom.aurora.EngineVersion}
+        DatabaseName: ${self:custom.aurora.DatabaseName}
+        MasterUsername: ${self:custom.aurora.MasterUsername}
+        MasterUserPassword: ${self:custom.aurora.MasterUserPassword}
+        DBClusterIdentifier: ${self:custom.aurora.DBClusterIdentifier}
+        BackupRetentionPeriod: 3
+        DeletionProtection: true
+        ScalingConfiguration:
+          MinCapacity: 2            # aurora-postgresql min is 2 ACUs
+          MaxCapacity: 2
+          AutoPause: true           # Scale to 0 ACE after 5 minutes
+          SecondsUntilAutoPause: 300
+        VpcSecurityGroupIds:
+          - Fn::GetAtt:
+              - AuroraSecurityGroup
+              - GroupId
+
   Outputs:
     rootApiGatewayId:
       Value:
@@ -91,3 +145,17 @@ resources:
           - RootResourceId
       Export:
         Name: ${self:custom.prefix}-rootResourceId # Export a CF name to be used by other services
+    dbHostname:
+      Value:
+         Fn::GetAtt:
+          - AuroraRDSCluster
+          - Endpoint.Address
+      Export:
+        Name: ${self:custom.prefix}-dbHostname # Export a CF name to be used by other services
+    dbPort:
+      Value:
+         Fn::GetAtt:
+          - AuroraRDSCluster
+          - Endpoint.Port
+      Export:
+        Name: ${self:custom.prefix}-dbPort # Export a CF name to be used by other services
