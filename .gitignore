@@ -22,6 +22,9 @@ jest-stare
 .env
 !.env.example
 
+# Local Development Files
+/.local_dev
+
 ##########################
 # Created by https://www.gitignore.io/api/node,macos,windows,terraform,serverless,visualstudiocode
 
