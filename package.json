@@ -10,12 +10,15 @@
   "author": "Bryan Vaz <bryanvaz@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
+    "db:migrate": "ts-node ./node_modules/typeorm/cli.js migration:run",
+    "db:rollback": "ts-node ./node_modules/typeorm/cli.js migration:revert",
     "lint": "prettier --write \"app/**/*.ts\" --write server/**/*.ts --write functions/**/*.ts && eslint --fix functions/**/*.ts app/**/*.ts server/**/*.ts",
     "watch": "nodemon --watch app --watch server -e ts,tsx --exec ts-node -r tsconfig-paths/register server",
     "sls": "serverless",
     "sls:deploy": "serverless deploy -s dev",
     "sls:test": "serverless invoke local -f server -p tests/helloWorld.json",
-    "test": "cross-env jest --forceExit"
+    "test": "cross-env jest --forceExit",
+    "typeorm": "ts-node ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "@koa/cors": "^3.0.0",
@@ -24,8 +27,13 @@
     "koa-body": "^4.1.0",
     "koa-helmet": "^4.2.0",
     "koa-router": "^7.4.0",
+    "pg": "^7.12.1",
+    "reflect-metadata": "^0.1.13",
     "serverless-http": "^2.0.2",
     "source-map-support": "^0.5.13",
+    "typedi": "^0.8.0",
+    "typeorm": "^0.2.18",
+    "typeorm-typedi-extensions": "^0.2.3",
     "winston": "^3.2.1"
   },
   "devDependencies": {
@@ -34,11 +42,13 @@
     "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@types/dotenv": "^6.1.1",
+    "@types/faker": "^4.1.5",
     "@types/jest": "^24.0.15",
     "@types/koa": "^2.0.49",
     "@types/koa-router": "^7.0.42",
     "@types/koa__cors": "^2.2.3",
     "@types/node": "^12.6.8",
+    "@types/pg": "^7.4.14",
     "@types/supertest": "^2.0.8",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
@@ -51,6 +61,7 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.13.7",
     "eslint-plugin-prettier": "^3.1.0",
+    "faker": "^4.1.0",
     "husky": "^3.0.1",
     "jest": "^24.8.0",
     "json5": "^2.1.0",

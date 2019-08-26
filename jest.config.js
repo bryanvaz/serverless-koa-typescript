@@ -9,6 +9,8 @@ module.exports = {
       "@app/(.*)": "<rootDir>/app/$1",
       "@config/(.*)": "<rootDir>/app/config/$1",
     },
+    globalSetup: '<rootDir>/app/__tests__/testSetup.ts',
+    // "globalTeardown": "<rootDir>/scripts/testTeardown.js"
     collectCoverage: true,
     collectCoverageFrom: [
       'app/**/*.{ts,js}',

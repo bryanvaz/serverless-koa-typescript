@@ -8,38 +8,26 @@ import * as Koa from 'koa';
 import * as bodyParser from 'koa-body';
 import * as helmet from 'koa-helmet';
 import * as cors from '@koa/cors';
-// import { createConnection } from 'typeorm';
-// import 'reflect-metadata';
-// import * as PostgressConnectionStringParser from 'pg-connection-string';
+import 'reflect-metadata';
+import { Container } from 'typedi';
 
 import { /* logger , */ loggerMiddleware } from '@config/logging';
 // import { config } from './config';
 import { router } from '@app/routes';
+import { Database } from '@app/db/database';
 
 export class ApplicationServer extends Koa {
-  public constructor() {
-    // create connection with database
-    // note that its not active database connection
-    // TypeORM creates you connection pull to uses connections from pull on your requests
-    // createConnection({
-    //     type: 'postgres',
-    //     host: connectionOptions.host,
-    //     port: connectionOptions.port,
-    //     username: connectionOptions.user,
-    //     password: connectionOptions.password,
-    //     database: connectionOptions.database,
-    //     synchronize: true,
-    //     logging: false,
-    //     entities: [
-    //        'dist/entity/**/*.js'
-    //     ],
-    //     extra: {
-    //         ssl: config.dbsslconn, // if not development, will use SSL
-    //     }
-    //  }).then(async connection => {
+  public database: Database;
 
-    // const app = new Koa();
+  public constructor() {
+    // Create initial Koa Server
     super();
+
+    // There is no need to connect on startup because the middleware code will connect on lambda request
+    this.database = Container.get(Database);
+    this.use(async () => {
+      await this.database.connect();
+    });
 
     // Enable bodyParser with default options
     this.use(bodyParser());
@@ -60,5 +48,9 @@ export class ApplicationServer extends Koa {
     this.use(router.routes()).use(router.allowedMethods());
 
     // }).catch(error => console.log('TypeORM connection error: ', error));
+  }
+
+  public async connectDB(): Promise<void> {
+    this.database.connect();
   }
 }

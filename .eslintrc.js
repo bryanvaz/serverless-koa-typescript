@@ -26,7 +26,9 @@ module.exports =  {
     'import/prefer-default-export': 0, // Too strict.
     'max-len': ['error', { code: 144 }],
     '@typescript-eslint/interface-name-prefix': 0, // the leading 'I' helps differentiate interfaces 
+    '@typescript-eslint/explicit-member-accessibility': 0, // Don't have to always have public accessibility 
     'implicit-arrow-linebreak': 0, // Arrow line breaks are important for chained promises
+    'class-methods-use-this': 0 // Koa awilix needs instance functions, even if they don't touch the service store
   },
   env: {
     'jest/globals': true,
